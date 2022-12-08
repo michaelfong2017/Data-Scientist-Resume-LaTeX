@@ -81,6 +81,9 @@
 \definecolor{materialindigo}{HTML}{3F51B5}
 \definecolor{materialblue}{HTML}{2196F3}
 \definecolor{materialcyan}{HTML}{00BCD4}
+\definecolor{materialpink}{HTML}{E91E63}
+\definecolor{materialred}{HTML}{F44336}
+\definecolor{materialblue}{HTML}{2196F3}
 \definecolor{materialteal}{HTML}{009688}
 \definecolor{materialgreen}{HTML}{4CAF50}
 \definecolor{materiallime}{HTML}{CDDC39}
@@ -141,6 +144,7 @@
 \newcommand{\cvhome}[1]{\renewcommand{\cvhome}{#1}}
 \newcommand{\cvlinkedin}[1]{\renewcommand{\cvlinkedin}{#1}}
 \newcommand{\cvgithub}[1]{\renewcommand{\cvgithub}{#1}}
+\newcommand{\cvwebsite}[1]{\renewcommand{\cvwebsite}{#1}}
 \newcommand{\cvmail}[1]{\renewcommand{\cvmail}{#1}}
 \newcommand{\cvnumberphone}[1]{\renewcommand{\cvnumberphone}{#1}}
 \newcommand{\cvbirthday}[1]{\renewcommand{\cvbirthday}{#1}}
@@ -283,12 +287,15 @@
     
     \vspace{2mm}
     \renewcommand{\arraystretch}{1.2}
-    \begin{tabular}{p{0.5cm} p{2cm} @{\hskip 0.25cm} p{0.5cm} p{3cm}}
+    \begin{tabular}{p{0.5cm} p{2cm} @{\hspace{0.25cm}} p{0.5cm} p{3cm}}
      \textnormal{\textcolor{pblue}{ \large \faBirthdayCake}} & \cvbirthday &  \textnormal{\textcolor{pblue}{ \large \faGlobe}} & \cvnatio \\
-     \textnormal{\textcolor{pblue}{\large \faHome}} & \cvhome & \textnormal{\textcolor{pblue}{\large \ \faMobile}} & \cvnumberphone  \\
-     \textnormal{\textcolor{pblue}{\faEnvelopeO}}   & \href{mailto:\cvmail}{\cvmail} \\
-		\textnormal{\textcolor{pblue}{\faGithub}} & \href{https://www.github.com/\cvgithub}{\cvgithub} &
-    \textnormal{\textcolor{pblue}{\faLinkedin}}  & \href{https://www.linkedin.com\cvlinkedin}{\cvlinkedin}        
+     \textnormal{\textcolor{pblue}{\large \faHome}} & \cvhome & \textnormal{\textcolor{pblue}{\large \ \faMobile}} & \cvnumberphone
+     \end{tabular}
+     \begin{tabular}{p{0.5cm} p{5.75cm}}
+     \textnormal{\textcolor{pblue}{\faEnvelopeO}}   & \href{mailto:\cvmail}{\textcolor{pblue}\cvmail} \\
+		\textnormal{\textcolor{pblue}{\faGithub}} & \href{https://www.github.com\cvgithub}{\textcolor{pblue} \cvgithub} \\
+    \textnormal{\textcolor{pblue}{\faLinkedin}}  & \href{https://www.linkedin.com\cvlinkedin}{\textcolor{pblue} \cvlinkedin} \\
+\textnormal{\textcolor{pblue}{\faWordpress}} & \href{\cvwebsite}{\textcolor{pblue} \cvwebsite}
     \end{tabular}
 
     %------------------------------------------------
@@ -307,7 +314,7 @@
 
 	{\large \textbf{Tools}} 
 
-		 \hspace{-0.55cm} \tools
+		 \hspace{0.35cm} \tools
 
 	  {\large \textbf{Programming}} 
 
@@ -324,6 +331,14 @@
   \end{textblock}
 }
 
+%----------------------------------------------------------------------------------------
+%	 TABLE LAYOUT NEW COLUMN TYPE
+%----------------------------------------------------------------------------------------
+% In order to align cells left/right with width
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
 
 %----------------------------------------------------------------------------------------
 %	 COLOURED SECTION TITLE BOX
@@ -383,21 +398,35 @@
 % }
 
 \newcommand{\twentyitem}[6]{%
-	#1&\parbox[t]{0.83\textwidth}{\textbf{#3} \hfill {\textcolor{pblue}{\textbf{#4}}}} \\%
+  \begin{tabular}{l p{0.35\textwidth} R{0.45\textwidth}}
+    #1\hspace{0.25cm} & \textbf{#3} & \textcolor{pblue}{\textbf{#4}}
+  \end{tabular} \\
+	% #1\vspace{0.6mm}&\parbox[t]{0.83\textwidth}{\hspace{0.25cm} \textbf{#3} \hspace*{\fill} {\textcolor{pblue}{\textbf{#4}}} \hspace{0.25cm} } \\%
   \multicolumn{2}{r}{\parbox[t]{0.95\textwidth}{\ifblank{#5}{}{#5 \\} #6 \vspace{\parsep}}}\\
+    \vspace{-1.5mm}
 }
 
 
-\newcommand{\twentyitemshorttest}[5]{%
-	#1&\parbox[t]{0.83\textwidth}{%
-		\textbf{#3}% 
-		\hfill%
-		{\textcolor{pblue}{\textbf{#4}}}%
-        }\\%
-    #2&\parbox[t]{0.83\textwidth}{%
-		\ifblank{#5}{}{#5} %
-	}\\
+\newcommand{\twentyitemshorttest}[6]{%
+%	#1&\parbox[t]{0.83\textwidth}{%
+%		\textbf{#3}% 
+%		\hspace*{\fill}%
+%		{\textcolor{pblue}{\textbf{#4}}}%
+%		\hspace{0.25cm}
+%        }\\%
+%    #2&\parbox[t]{0.83\textwidth}{%
+%		\ifblank{#5}{}{#5} %
+%	}\\
+	#1\vspace{0.6mm}&\parbox[t]{0.83\textwidth}{\hspace{0.25cm} \textbf{#3} \hfill {\textcolor{pblue}{\textbf{#4}}}  } \\%
+  \multicolumn{2}{r}{\parbox[t]{0.908\textwidth}{\ifblank{#5}{}{#5 \\} #6 \vspace{\parsep}}}\\
+    \vspace{-1.5mm}
 }
+
+%\newcommand{\twentyitemtable}[6]{%
+%	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
+%}{%
+%	\end{tabular*}
+%}
 
 %----------------------------------------------------------------------------------------
 %	 SMALL LIST ENVIRONMENT
@@ -440,7 +469,7 @@
     % set center bubble color
     bubble center node color = pblue,
     % define the list of colors usable in the diagram
-    set color list = {materialcyan, orange, green, materialorange, materialteal, materialamber, materialindigo, materialgreen, materiallime},
+    set color list = {materialcyan, materialpink, materialred, materialblue, orange, green, materialorange, materialteal, materialamber, materialindigo, materialgreen, materiallime},
     % sets the opacity at which the bubbles are shown
     bubble fill opacity = 0.6,
     % sets the opacity at which the bubble text is shown
